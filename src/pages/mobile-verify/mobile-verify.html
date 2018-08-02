@@ -1,0 +1,22 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content no-bounce noScroll>
+
+  <ion-list>
+    <ion-item dir="ltr" input withprefix>
+      <ion-label stacked>
+        <span text-center> ادخل رمز التحقق</span>
+        <ion-icon prefix></ion-icon>
+      </ion-label>
+      <ion-input number-font (ionFocus)="focused = true" (focusout)="focused = false" type="number" pattern="\d*" id="code" name="code"
+        [(ngModel)]="code" required minlength="4" maxlength="4"></ion-input>
+    </ion-item>
+    <p text-center error *ngIf="error">{{error}}</p>
+  </ion-list>
+  <button (click)="verify()" ion-button full>التالي</button>
+</ion-content>

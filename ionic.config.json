@@ -1,0 +1,7 @@
+{
+  "name": "hajj-hack",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
