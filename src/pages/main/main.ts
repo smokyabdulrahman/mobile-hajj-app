@@ -20,8 +20,7 @@ export class MainPage {
   statsRoot = 'StatsPage'
   settingsRoot = 'SettingsPage'
 
-  isLeader: boolean = true;
-
-
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController) {
+    
+  }
 }

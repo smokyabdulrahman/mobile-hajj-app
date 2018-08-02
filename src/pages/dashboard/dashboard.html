@@ -4,17 +4,17 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header no-border>
     <ion-toolbar>
         <ion-title>Dashboard</ion-title>
-        <ion-buttons end>
+        <ion-buttons right>
             <button ion-button color="save" (click)="online = !online">
                 <ion-icon *ngIf="online" name="checkmark-circle"></ion-icon>
                 <ion-icon *ngIf="!online" color="danger" name="close-circle"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-buttons start>
-            <button ion-button color="save">
+        <ion-buttons left>
+            <button ion-button color="save" (click)="push('ProfilePage')">
                 <ion-icon name="contact"></ion-icon>
             </button>
         </ion-buttons>
@@ -81,6 +81,11 @@
         </ion-card>
     </div>
     <div *ngIf="!online">
-        هنقققللللع يا ابوي
+        <ion-spinner *ngIf="loading">
+        </ion-spinner>
+        <h2>
+            Thanks for your Efforts!
+            Take a rest and come back, we need you!
+        </h2>
     </div>
 </ion-content>

@@ -27,7 +27,7 @@ export class StatsPage {
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{

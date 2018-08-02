@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,13 +16,13 @@
   <ion-grid>
     <ion-row>
       <ion-item>
-        <ion-label color="primary">رقم الجوال</ion-label>
+        <ion-label color="primary">Phone number</ion-label>
         <ion-input type="tel"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row>
       <button (click)="pushPage('MobileVerifyPage')" ion-button full>
-        تسجيل الدخول
+        Sign in
       </button>
     </ion-row>
   </ion-grid>
@@ -30,6 +30,6 @@
 
 <ion-footer>
   <button (click)="pushPage('SignUpPage')" ion-button full>
-    ليس لديك حساب؟ اضغط هنا
+    Not a user? Sign up here
   </button>
 </ion-footer>

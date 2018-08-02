@@ -32,4 +32,8 @@ export class DashboardPage {
     this.launchNavigator.navigate([lat, lng]);
   }
 
+  push(page: string) {
+    this.navCtrl.push(page);
+  }
+
 }
