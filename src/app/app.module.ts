@@ -8,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AgmCoreModule } from '@agm/core';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { Device } from '@ionic-native/device';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpProvider } from '../providers/http/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBu8VmcLkdBv2sIpKR2uppIxQcHrZnBaJE'
-    })
+    }),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -28,7 +32,9 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
     StatusBar,
     SplashScreen,
     LaunchNavigator,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Device,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HttpProvider
   ]
 })
 export class AppModule {}

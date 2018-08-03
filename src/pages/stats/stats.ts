@@ -17,8 +17,10 @@ import { Chart } from 'chart.js';
 export class StatsPage {
 
   @ViewChild('barCanvas') barCanvas;
+  @ViewChild('doughnutCanvas') doughnutCanvas;
 
   barChart: any;
+  doughnutChart: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -27,29 +29,17 @@ export class StatsPage {
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
-      type: 'doughnut',
+      type: 'line',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["11/8", "11/9", "11/10", "11/11", "11/12", "11/13"],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
+          label: 'Your # of Working Hours',
+          data: [4, 6, 5, 6.4, 3, 3],
+          backgroundColor: 'rgb(81,192,170, 0.3)'
+        }, {
+          label: 'Avg # of Working Hours',
+          data: [5, 2.8, 4.7, 9, 2.5, 5],
+          backgroundColor: 'rgb(220,226,228, 0.3)'
         }]
       },
       options: {
@@ -62,6 +52,18 @@ export class StatsPage {
         }
       }
 
+    });
+
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        datasets: [
+          {
+            backgroundColor: ["rgb(81,192,170)", "rgb(220,226,228, 0)"],
+            data: [8000, 2000]
+          }
+        ]
+      }
     });
 
   }

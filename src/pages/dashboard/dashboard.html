@@ -8,7 +8,7 @@
     <ion-toolbar>
         <ion-title>Dashboard</ion-title>
         <ion-buttons right>
-            <button ion-button color="save" (click)="online = !online">
+            <button ion-button color="save" (click)="online = !online; setOnline()">
                 <ion-icon *ngIf="online" name="checkmark-circle"></ion-icon>
                 <ion-icon *ngIf="!online" color="danger" name="close-circle"></ion-icon>
             </button>
@@ -23,8 +23,14 @@
 
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-fab bottom left *ngIf="isLeader && online">
+        <button ion-fab (click)="openAnnouncModal()">Send</button>
+    </ion-fab>
     <div *ngIf="online">
-        <ion-card>
+        <ion-card *ngFor="let req of requests">
             <ion-card-header>
                 <ion-item>
                     <ion-avatar item-start>
@@ -34,58 +40,78 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <p>
-                    Your help is needed here (active)
-                </p>
-                <agm-map [zoom]="18" [latitude]="lat" [longitude]="lng">
-                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                <h2 lg-text>
+                    {{req.text}}
+                </h2>
+                <agm-map [zoom]="18" [latitude]="req.lat" [longitude]="req.lng">
+                    <agm-marker [latitude]="req.lat" [longitude]="req.lng"></agm-marker>
                 </agm-map>
-                <button ion-button (click)="navigate(lat, lng)">GO</button>
-                <button ion-button>Decline</button>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-6>
+                            <button full ion-button (click)="navigate(req.lat, req.lng)">GO</button>
+                        </ion-col>
+                        <ion-col col-6>
+                            <button full ion-button>Decline</button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-card-content>
         </ion-card>
-        <ion-card>
-            <ion-card-header>
-                <ion-item>
-                    <ion-avatar item-start>
-                        <img src="https://www.kau.edu.sa/Files/0016617/Galleries/6608/51617_P1016195%20copy.jpg">
-                    </ion-avatar>
-                    <p>Volunteer Care</p>
-                </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-card-title>
-                    Congratulations!
-                </ion-card-title>
-                <p>
-                    You volunteered for 8 hours today!
-                </p>
-            </ion-card-content>
-        </ion-card>
-        <ion-card>
-            <ion-card-header>
-                <ion-item>
-                    <ion-avatar item-start>
-                        <img src="https://www.kau.edu.sa/Files/0016617/Galleries/6608/51617_P1016195%20copy.jpg">
-                    </ion-avatar>
-                    <p>Admin</p>
-                </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-                <p>
-                    Your help is needed here (deactive)
-                </p>
-                <button ion-button disabled>GO</button>
-                <button ion-button disabled>Decline</button>
-            </ion-card-content>
-        </ion-card>
+        <!-- <div *ngFor="let req of data">
+            <ion-card *ngIf="req.type === 0">
+                <ion-card-header>
+                    <ion-item>
+                        <ion-avatar item-start>
+                            <img src="{{req.img}}">
+                        </ion-avatar>
+                        <p>{{req.name}}</p>
+                    </ion-item>
+                </ion-card-header>
+                <ion-card-content>
+                    <p>
+                        {{req.msg}}
+                    </p>
+                    <agm-map [zoom]="18" [latitude]="req.lat" [longitude]="req.lng">
+                        <agm-marker [latitude]="req.lat" [longitude]="req.lng"></agm-marker>
+                    </agm-map>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-6>
+                                <button full ion-button [disabled]="!req.active" (click)="navigate(req.lat, req.lng)">GO</button>
+                            </ion-col>
+                            <ion-col col-6>
+                                <button full ion-button [disabled]="!req.active">Decline</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+            <ion-card *ngIf="req.type === 1">
+                <ion-card-header>
+                    <ion-item>
+                        <ion-avatar item-start>
+                            <img src="{{req.img}}">
+                        </ion-avatar>
+                        <p>{{req.name}}</p>
+                    </ion-item>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-card-title>
+                        Congratulations!
+                    </ion-card-title>
+                    <p>
+                        {{req.msg}}
+                    </p>
+                </ion-card-content>
+            </ion-card>
+        </div> -->
     </div>
     <div *ngIf="!online">
-        <ion-spinner *ngIf="loading">
+        <ion-spinner offline-spinner *ngIf="loading">
         </ion-spinner>
-        <h2>
-            Thanks for your Efforts!
-            Take a rest and come back, we need you!
+        <h2 *ngIf="!loading">
+            Thanks for your Efforts! Take a rest and come back, we need you!
         </h2>
     </div>
 </ion-content>

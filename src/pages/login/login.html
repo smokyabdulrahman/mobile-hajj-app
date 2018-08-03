@@ -17,11 +17,11 @@
     <ion-row>
       <ion-item>
         <ion-label color="primary">Phone number</ion-label>
-        <ion-input type="tel"></ion-input>
+        <ion-input type="tel" [(ngModel)]="phone"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row>
-      <button (click)="pushPage('MobileVerifyPage')" ion-button full>
+      <button (click)="login()" ion-button full>
         Sign in
       </button>
     </ion-row>
